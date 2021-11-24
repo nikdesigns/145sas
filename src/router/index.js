@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import About from '../views/About.vue';
-import Register from '../views/Registration/Register.vue';
+import Register from '../views/registration/Register.vue';
+import PromoSponsorship from '../views/sponsorships/PromoSponsorship.vue';
+import UserProfile from '../views/users/UserProfile.vue';
 
 const routes = [
   {
@@ -18,6 +20,16 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register,
+  },
+  {
+    path: '/sponsorships/promo-sponsorships',
+    name: 'PromoSponsorship',
+    component: PromoSponsorship,
+  },
+  {
+    path: '/user-profile',
+    name: 'UserProfile',
+    component: UserProfile,
   },
 ];
 

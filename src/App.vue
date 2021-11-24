@@ -1,12 +1,14 @@
 <template>
+  <top-navbar></top-navbar>
   <router-view />
 </template>
 
 
 
 <script>
+import TopNavbar from "./components/TopNavbar.vue";
 export default {
-  components: {},
+  components: { TopNavbar },
 };
 </script>
 
