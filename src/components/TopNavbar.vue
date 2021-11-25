@@ -29,13 +29,13 @@
           <div class="flex-shrink-0 flex items-center">
             <img
               class="block lg:hidden h-8 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-              alt="Workflow"
+              src="../assets/summit_logo_big.png"
+              alt="145SummitAtSea"
             />
             <img
-              class="hidden lg:block h-8 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-logo-indigo-600-mark-gray-800-text.svg"
-              alt="Workflow"
+              class="hidden lg:block h-11 w-auto"
+              src="../assets/summit_logo_big.png"
+              alt="145SummitAtSea"
             />
           </div>
           <div class="hidden md:ml-6 md:flex md:space-x-8">
@@ -43,9 +43,11 @@
             <router-link
               to="/"
               exact
+              exact-active-class="border-indigo-500 text-gray-900"
               class="
-                border-indigo-500
-                text-gray-900
+                border-transparent
+                text-gray-500
+                hover:border-gray-300 hover:text-gray-700
                 inline-flex
                 items-center
                 px-1
@@ -77,6 +79,7 @@
             <router-link
               to="/staterooms"
               exact
+              exact-active-class="border-indigo-500 text-gray-900"
               class="
                 border-transparent
                 text-gray-500
@@ -92,8 +95,10 @@
             >
               Staterooms
             </router-link>
-            <a
-              href="#"
+            <router-link
+              to="/contact-us"
+              exact
+              exact-active-class="border-indigo-500 text-gray-900"
               class="
                 border-transparent
                 text-gray-500
@@ -107,13 +112,16 @@
                 font-medium
               "
             >
-              Calendar
-            </a>
+              Contact us
+            </router-link>
           </div>
         </div>
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <router-link to="/register" exact-active-class="">
+            <router-link
+              to="/register"
+              exact-active-class="border-indigo-500 text-gray-900"
+            >
               <button
                 type="button"
                 class="

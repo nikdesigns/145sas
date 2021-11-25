@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div v-if="stateroom" class="">
     <div
       class="
         max-w-2xl
@@ -12,36 +12,7 @@
     >
       <!-- Product details -->
       <div class="lg:max-w-lg lg:self-end">
-        <nav aria-label="Breadcrumb">
-          <ol role="list" class="flex items-center space-x-2">
-            <li
-              v-for="(breadcrumb, breadcrumbIdx) in product.breadcrumbs"
-              :key="breadcrumb.id"
-            >
-              <div class="flex items-center text-sm">
-                <a
-                  :href="breadcrumb.href"
-                  class="font-medium text-gray-500 hover:text-gray-900"
-                >
-                  {{ breadcrumb.name }}
-                </a>
-                <svg
-                  v-if="breadcrumbIdx !== product.breadcrumbs.length - 1"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  aria-hidden="true"
-                  class="ml-2 flex-shrink-0 h-5 w-5 text-gray-300"
-                >
-                  <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
-                </svg>
-              </div>
-            </li>
-          </ol>
-        </nav>
-
         <div class="mt-4">
-          saaz
           <h1
             class="
               text-3xl
@@ -51,44 +22,23 @@
               sm:text-4xl
             "
           >
-            {{ product.name }}
+            {{ stateroom.name }}
           </h1>
         </div>
 
         <section aria-labelledby="information-heading" class="mt-4">
-          <h2 id="information-heading" class="sr-only">Product information</h2>
+          <h2 id="information-heading" class="sr-only">
+            Stateroom information
+          </h2>
 
           <div class="flex items-center">
-            <p class="text-lg text-gray-900 sm:text-xl">{{ product.price }}</p>
-
-            <div class="ml-4 pl-4 border-l border-gray-300">
-              <h2 class="sr-only">Reviews</h2>
-              <div class="flex items-center">
-                <div>
-                  <div class="flex items-center">
-                    <StarIcon
-                      v-for="rating in [0, 1, 2, 3, 4]"
-                      :key="rating"
-                      :class="[
-                        reviews.average > rating
-                          ? 'text-yellow-400'
-                          : 'text-gray-300',
-                        'h-5 w-5 flex-shrink-0',
-                      ]"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  <p class="sr-only">{{ reviews.average }} out of 5 stars</p>
-                </div>
-                <p class="ml-2 text-sm text-gray-500">
-                  {{ reviews.totalCount }} reviews
-                </p>
-              </div>
-            </div>
+            <p class="text-lg text-gray-900 sm:text-xl">
+              ${{ stateroom.price }}
+            </p>
           </div>
 
           <div class="mt-4 space-y-6">
-            <p class="text-base text-gray-500">{{ product.description }}</p>
+            <p class="text-base text-gray-500">{{ stateroom.description }}</p>
           </div>
         </section>
       </div>
@@ -97,8 +47,8 @@
       <div class="mt-10 lg:mt-0 lg:col-start-2 lg:row-span-2 lg:self-center">
         <div class="aspect-w-1 aspect-h-1 rounded-lg overflow-hidden">
           <img
-            :src="product.imageSrc"
-            :alt="product.imageAlt"
+            :src="stateroom.imageSrc"
+            :alt="stateroom.imageAlt"
             class="w-full h-full object-center object-cover"
           />
         </div>
@@ -111,54 +61,23 @@
         <section aria-labelledby="options-heading">
           <h2 id="options-heading" class="sr-only">Product options</h2>
 
-          <form>
-            <div class="sm:flex sm:justify-between">
-              <!-- Size selector -->
-              <RadioGroup v-model="selectedSize">
-                <RadioGroupLabel
-                  class="block text-sm font-medium text-gray-700"
+          <div class="mt-1">
+            <h3 class="text-sm font-medium text-gray-900">Highlights</h3>
+
+            <div class="mt-4">
+              <ul role="list" class="pl-4 list-disc text-sm space-y-2">
+                <li
+                  v-for="amen in stateroom.amenities"
+                  :key="amen.id"
+                  class="text-gray-400"
                 >
-                  Size
-                </RadioGroupLabel>
-                <div class="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <RadioGroupOption
-                    as="template"
-                    v-for="size in product.sizes"
-                    :key="size.name"
-                    :value="size"
-                    v-slot="{ active, checked }"
-                  >
-                    <div
-                      :class="[
-                        active ? 'ring-2 ring-indigo-500' : '',
-                        'relative block border border-gray-300 rounded-lg p-4 cursor-pointer focus:outline-none',
-                      ]"
-                    >
-                      <RadioGroupLabel
-                        as="p"
-                        class="text-base font-medium text-gray-900"
-                      >
-                        {{ size.name }}
-                      </RadioGroupLabel>
-                      <RadioGroupDescription
-                        as="p"
-                        class="mt-1 text-sm text-gray-500"
-                      >
-                        {{ size.description }}
-                      </RadioGroupDescription>
-                      <div
-                        :class="[
-                          active ? 'border' : 'border-2',
-                          checked ? 'border-indigo-500' : 'border-transparent',
-                          'absolute -inset-px rounded-lg pointer-events-none',
-                        ]"
-                        aria-hidden="true"
-                      />
-                    </div>
-                  </RadioGroupOption>
-                </div>
-              </RadioGroup>
+                  <span class="text-gray-600">{{ amen.desc }}</span>
+                </li>
+              </ul>
             </div>
+          </div>
+
+          <form>
             <div class="mt-4">
               <a
                 href="#"
@@ -233,14 +152,17 @@
       </div>
     </div>
   </div>
+  <div v-else></div>
 </template>
 
 <script>
-import { ref } from "vue";
 import {
   CheckIcon,
   QuestionMarkCircleIcon,
   StarIcon,
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
 } from "@heroicons/vue/solid";
 import {
   RadioGroup,
@@ -248,48 +170,31 @@ import {
   RadioGroupLabel,
   RadioGroupOption,
 } from "@headlessui/vue";
-import { ShieldCheckIcon } from "@heroicons/vue/outline";
-
-const product = {
-  name: "Ocean View Stateroom",
-  href: "#",
-  price: "$5850",
-  description:
-    "Don't compromise on snack-carrying capacity with this lightweight and spacious bag. The drawstring top keeps all your favorite chips, crisps, fries, biscuits, crackers, and cookies secure.As you sail to Cozumel, you won’t want to miss a single moment. In an Ocean View stateroom, you’ll be treated to a beautiful new view every day! Spend the day exploring the sites and sounds of Cozumel, then retreat to your comfortable, well-appointed stateroom to relax.",
-  imageSrc:
-    "https://tailwindui.com/img/ecommerce-images/product-page-04-featured-product-shot.jpg",
-  imageAlt:
-    "Model wearing light green backpack with black canvas straps and front zipper pouch.",
-  breadcrumbs: [
-    { id: 1, name: "Travel", href: "#" },
-    { id: 2, name: "Bags", href: "#" },
-  ],
-  amenities: [
-    { id: 1, desc: "Max: 2 Passengers" },
-    { id: 2, desc: "Luxurious Bedding" },
-    { id: 3, desc: "Two twin beds or one queen-size bed" },
-    { id: 4, desc: "Sitting Area" },
-    { id: 5, desc: "Private bath with shower, vanity area, and hair dryer" },
-    { id: 6, desc: "24-Hour Room Service*" },
-    { id: 7, desc: "Round-the-Clock Stateroom Attendant" },
-    { id: 8, desc: "Nightly Turn-Down Service" },
-    { id: 9, desc: "Interactive TV & Movies" },
-    { id: 10, desc: "In-Room Safe" },
-    { id: 11, desc: "Phone and Voicemail Service" },
-  ],
-  sizes: [
-    { name: "18L", description: "Perfect for a reasonable amount of snacks." },
-    { name: "20L", description: "Enough room for a serious amount of snacks." },
-  ],
-};
-const reviews = { average: 4, totalCount: 1624 };
+import {
+  ShieldCheckIcon,
+  HeartIcon,
+  MinusSmIcon,
+  PlusSmIcon,
+} from "@heroicons/vue/outline";
 
 export default {
-  mounted() {
-    const id = this.$route.params.id;
-    console.log(id);
+  props: ["id"],
+  data() {
+    return {
+      stateroom: null,
+    };
   },
+  mounted() {
+    fetch("http://localhost:3000/staterooms/" + this.id)
+      .then((res) => res.json())
+      .then((data) => (this.stateroom = data))
+      .catch((err) => console.log(err.message));
+  },
+
   components: {
+    Disclosure,
+    DisclosureButton,
+    DisclosurePanel,
     RadioGroup,
     RadioGroupDescription,
     RadioGroupLabel,
@@ -298,15 +203,9 @@ export default {
     QuestionMarkCircleIcon,
     ShieldCheckIcon,
     StarIcon,
-  },
-  setup() {
-    const selectedSize = ref(product.sizes[0]);
-
-    return {
-      product,
-      reviews,
-      selectedSize,
-    };
+    HeartIcon,
+    MinusSmIcon,
+    PlusSmIcon,
   },
 };
 </script>

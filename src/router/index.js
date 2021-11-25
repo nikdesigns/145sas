@@ -6,6 +6,7 @@ import PromoSponsorship from '../views/sponsorships/PromoSponsorship.vue';
 import UserProfile from '../views/users/UserProfile.vue';
 import StateRooms from '../views/staterooms/StateRooms.vue';
 import RoomDetails from '../views/staterooms/RoomDetails.vue';
+import ContactPage from '../views/ContactPage';
 import ErrorPage from '../views/ErrorPage.vue';
 
 const routes = [
@@ -44,6 +45,11 @@ const routes = [
     name: 'RoomDetails',
     component: RoomDetails,
     props: true,
+  },
+  {
+    path: '/contact-us',
+    name: 'ContactPage',
+    component: ContactPage,
   },
   //404 Page
   {
