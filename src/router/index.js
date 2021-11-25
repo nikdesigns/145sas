@@ -4,6 +4,9 @@ import About from '../views/About.vue';
 import Register from '../views/registration/Register.vue';
 import PromoSponsorship from '../views/sponsorships/PromoSponsorship.vue';
 import UserProfile from '../views/users/UserProfile.vue';
+import StateRooms from '../views/staterooms/StateRooms.vue';
+import RoomDetails from '../views/staterooms/RoomDetails.vue';
+import ErrorPage from '../views/ErrorPage.vue';
 
 const routes = [
   {
@@ -30,6 +33,23 @@ const routes = [
     path: '/user-profile',
     name: 'UserProfile',
     component: UserProfile,
+  },
+  {
+    path: '/staterooms',
+    name: 'StateRooms',
+    component: StateRooms,
+  },
+  {
+    path: '/staterooms/:id',
+    name: 'RoomDetails',
+    component: RoomDetails,
+    props: true,
+  },
+  //404 Page
+  {
+    path: '/:catchAll(.*)',
+    name: 'ErrorPage',
+    component: ErrorPage,
   },
 ];
 

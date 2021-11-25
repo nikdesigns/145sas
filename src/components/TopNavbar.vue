@@ -40,8 +40,9 @@
           </div>
           <div class="hidden md:ml-6 md:flex md:space-x-8">
             <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
-            <a
-              href="#"
+            <router-link
+              to="/"
+              exact
               class="
                 border-indigo-500
                 text-gray-900
@@ -54,8 +55,8 @@
                 font-medium
               "
             >
-              Dashboard
-            </a>
+              Home
+            </router-link>
             <a
               href="#"
               class="
@@ -71,10 +72,11 @@
                 font-medium
               "
             >
-              Team
+              Summit
             </a>
-            <a
-              href="#"
+            <router-link
+              to="/staterooms"
+              exact
               class="
                 border-transparent
                 text-gray-500
@@ -88,8 +90,8 @@
                 font-medium
               "
             >
-              Projects
-            </a>
+              Staterooms
+            </router-link>
             <a
               href="#"
               class="
@@ -111,31 +113,32 @@
         </div>
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <button
-              type="button"
-              class="
-                relative
-                inline-flex
-                items-center
-                px-4
-                py-2
-                border border-transparent
-                text-sm
-                font-medium
-                rounded-md
-                text-white
-                bg-indigo-600
-                shadow-sm
-                hover:bg-indigo-700
-                focus:outline-none
-                focus:ring-2
-                focus:ring-offset-2
-                focus:ring-indigo-500
-              "
-            >
-              <PlusSmIcon class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-              <span>New Job</span>
-            </button>
+            <router-link to="/register" exact-active-class="">
+              <button
+                type="button"
+                class="
+                  relative
+                  inline-flex
+                  items-center
+                  px-4
+                  py-2
+                  border border-transparent
+                  text-sm
+                  font-medium
+                  rounded-md
+                  text-white
+                  bg-indigo-600
+                  shadow-sm
+                  hover:bg-indigo-700
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-offset-2
+                  focus:ring-indigo-500
+                "
+              >
+                <span>Register</span>
+              </button>
+            </router-link>
           </div>
           <div class="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
             <button
@@ -244,8 +247,8 @@
       <div class="pt-2 pb-3 space-y-1">
         <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" -->
         <DisclosureButton
-          as="a"
-          href="#"
+          as="router-link"
+          to="/"
           class="
             bg-indigo-50
             border-indigo-500
@@ -259,7 +262,7 @@
             font-medium
             sm:pl-5 sm:pr-6
           "
-          >Dashboard</DisclosureButton
+          >Home</DisclosureButton
         >
         <DisclosureButton
           as="a"
