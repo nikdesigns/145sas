@@ -29,31 +29,44 @@
             >
               404 error
             </p>
-            <h1
+            <h2
               class="
                 mt-2
-                text-4xl
+                text-3xl
                 font-extrabold
                 text-gray-900
                 tracking-tight
-                sm:text-5xl
+                sm:text-3xl
               "
             >
-              Page not found
-            </h1>
+              Uh oh...
+            </h2>
+            <h3
+              class="
+                text-2xl
+                font-extrabold
+                text-gray-900
+                tracking-tight
+                sm:text-2xl
+              "
+            >
+              It seems you are lost at sea.
+            </h3>
             <p class="mt-2 text-base text-gray-500">
               Sorry, we couldn’t find the page you’re looking for.
             </p>
             <div class="mt-6">
-              <a
-                href="#"
+              <router-link
+                to="/"
                 class="
                   text-base
                   font-medium
                   text-indigo-600
                   hover:text-indigo-500
                 "
-                >Go back home<span aria-hidden="true"> &rarr;</span></a
+                >Go back home<span aria-hidden="true">
+                  &rarr;</span
+                ></router-link
               >
             </div>
           </div>

@@ -1,5 +1,43 @@
 <template>
-  <div v-if="stateroom" class="">
+  <div
+    v-if="error"
+    class="
+      max-w-xl
+      mx-auto
+      py-2
+      px-4
+      sm:py-8 sm:px-6
+      lg:max-w-7xl lg:px-8
+      min-h-screen
+    "
+  >
+    <div class="rounded-md bg-red-50 p-4">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <QuestionMarkCircleIcon
+            class="h-5 w-5 text-red-400"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="ml-3">
+          <h3 class="text-sm font-medium text-red-800">
+            Looking for something?
+          </h3>
+          <div class="mt-2 text-sm text-red-700">
+            <p>
+              {{ error }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <router-link to="/">
+      <p class="text-sm underline font-normal text-gray-500 m-2">
+        Click here to go back to the home page
+      </p>
+    </router-link>
+  </div>
+  <div v-if="stateroom">
     <div
       class="
         max-w-2xl
@@ -152,10 +190,14 @@
       </div>
     </div>
   </div>
-  <div v-else></div>
+  <div v-if="loading">
+    <SkeletonRoomDetails />
+  </div>
 </template>
 
 <script>
+import getStateroom from "@/composables/getStateroom";
+import SkeletonRoomDetails from "@/components/Loaders/SkeletonRoomDetails";
 import {
   CheckIcon,
   QuestionMarkCircleIcon,
@@ -163,6 +205,7 @@ import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
+  ExclamationIcon,
 } from "@heroicons/vue/solid";
 import {
   RadioGroup,
@@ -179,16 +222,12 @@ import {
 
 export default {
   props: ["id"],
-  data() {
-    return {
-      stateroom: null,
-    };
-  },
-  mounted() {
-    fetch("http://localhost:3000/staterooms/" + this.id)
-      .then((res) => res.json())
-      .then((data) => (this.stateroom = data))
-      .catch((err) => console.log(err.message));
+
+  setup(props) {
+    const { stateroom, error, loading, load } = getStateroom(props.id);
+    load();
+
+    return { stateroom, error, loading };
   },
 
   components: {
@@ -205,7 +244,9 @@ export default {
     StarIcon,
     HeartIcon,
     MinusSmIcon,
+    ExclamationIcon,
     PlusSmIcon,
+    SkeletonRoomDetails,
   },
 };
 </script>
